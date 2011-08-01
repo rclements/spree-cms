@@ -10,8 +10,13 @@ The extension provides basic views and a stylesheet that can easily be overridde
 Installation
 ------------
 
-    script/extension install git://github.com/jacobwg/spree-cms.git
-    rake gems:install
+Add to Gemfile:
+
+    gem "spree_cms", :git => git://github.com/kiba/spree-cms.git
+
+Then do:
+
+    rails g spree_cms:install
     rake db:migrate
 
 All authors for the blog should be given a display name in the admin/users edit form. 
