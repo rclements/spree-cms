@@ -21,10 +21,10 @@
 <table class="index">
   <tr>
     <%= hook :admin_posts_index_headers do %>
-      <th><%= order @search, :by => :title, :as => t("cms.title") %></th>
-      <th><%= order @search, :by => :author, :as => t("cms.author") %></th>
+      <th><%= sort_link @search, :by => :title, :as => t("cms.title") %></th>
+      <th><%= sort_link @search, :by => :author, :as => t("cms.author") %></th>
       <th><%= t("cms.tags") %></th>
-      <th><%= order @search, :by => :date, :as => t("cms.date") %></th>
+      <th><%= sort_link @search, :by => :date, :as => t("cms.date") %></th>
     <% end %>
     <th>
       <%= hook :admin_posts_index_header_actions %>
@@ -69,21 +69,21 @@
         <label><%= t("cms.published_date_range") %></label><br />
         <div class="yui-g date-range-filter">
           <div class="yui-u sub-field first">
-            <%= f.unobtrusive_date_text_picker :published_at_after %><br />
+            <%= f.unobtrusive_date_text_picker :published_at_greater_than %><br />
             <label class="sub"><%= t("start") %></label>
           </div>
           <div class="yui-u sub-field">
-            <%= f.unobtrusive_date_text_picker :published_at_before %><br />
+            <%= f.unobtrusive_date_text_picker :published_at_less_than %><br />
             <label><%= t("stop") %></label>
           </div>
         </div>
 
         <p>
           <label><%= t("cms.author") %></label><br />
-          <%= collection_select( :user, :user_id, User.roles_name_equals("admin"), :id, :display_name) %></p>
+          <%= collection_select( :user, :user_id, @users, :id, :display_name) %></p>
         </p>
         <p>
-          <%= f.check_box :is_active, {:style => "vertical-align:middle;"}, "1", ""  %>
+          <%= f.check_box :is_active_equals, {:style => "vertical-align:middle;"}, "1", ""  %>
           <label>
             <%= t("cms.show_only_published_posts") %>
           </label>

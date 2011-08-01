@@ -33,13 +33,13 @@ class Admin::PostsController < Admin::BaseController
         #if params[:search].nil? || params[:search][:deleted_at_not_null].blank?
         #  base_scope = base_scope.not_deleted
         #end
-        
-        @search = Post.searchlogic(params[:search])
+        @users = User.all.select{|x| x.has_role?('admin')}
+        @search = Post.search(params[:search])
 
         # @search = Post.search(params[:search])
         # @search.order ||= "ascend_by_title"
 
-        @collection = @search.do_search.paginate(
+        @collection = @search.paginate(
           :per_page => (Spree::Config[:per_page]||50),
           :page     => params[:page]
         )

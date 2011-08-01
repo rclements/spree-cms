@@ -34,12 +34,12 @@ class Admin::PagesController < Admin::BaseController
         #  base_scope = base_scope.not_deleted
         #end
 
-        @search = Page.searchlogic(params[:search])
+        @search = Page.search(params[:search])
 
         # @search = Post.search(params[:search])
         # @search.order ||= "ascend_by_title"
 
-        @collection = @search.do_search.paginate(
+        @collection = @search.paginate(
           :per_page => (Spree::Config[:per_page]||50),
           :page     => params[:page]
         )
